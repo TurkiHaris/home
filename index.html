@@ -6,26 +6,112 @@
     <head>
 
 
-        <!-- META -->
-       
-        <meta charset="utf-8">
-        <meta name="robots" content="noodp">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-        <!-- PAGE TITLE -->
        
         <title>Turki Haris - Coming Soon</title>
+       <style>
+            $pi: 3.14159265358979;
+            $cylinder-width: 1000px;
+            $face-count: 20;
+            $face-deg: (360deg / $face-count);
+            $face-height: ($cylinder-width / $face-count);
+            $face-shift: ($cylinder-width / $pi / 2);
+            body {
+              background: #2c2c2c;
+              cursor: none;
+              overflow: hidden;
+              font-family: 'Roboto', sans-serif;
+            }
+            .custom-cursor{
+              width: 60px;
+              height: 60px;
+              background-color: #fff;
+              opacity: 0.3;
+              border-radius: 50%;
+            }
+            .title {  
+              font-weight: 300;
+              text-align: center;
+              letter-spacing: 10px;
+              font-size: 18px;
+              margin-bottomn: 100px;
+              span {
+                background: radial-gradient(circle, #fff 30%, #c2c2c2 100%);
+              background-clip: text;
+              -webkit-background-clip: text;
+              color: transparent;
+              }
+            }
+            .holder {
+              transform-style: preserve-3d;
+              width: 80vw;
+              height: 450px;
+              margin: 0 auto;
+              perspective: 1000px;
+            }
+            .cylinder {
+              position: relative;
+              height: 100%;
+              width: 100%;
+              transform-style: preserve-3d;
+              animation: spin 30s infinite linear;
 
-        <!-- FAVICON -->
-        <link rel="shortcut icon" href="assets/img/favicon.png">
+            }
+            .face {
+              background: radial-gradient(circle, #fff 30%, #c2c2c2 100%);
+              background-clip: text;
+              -webkit-background-clip: text;
+              color: transparent;
+              font-size: 62px;
+              letter-spacing: 4px;
+              line-height: $face-height;
+              font-weight: 900;
+              text-align: center;
+              position: absolute;
+              width: auto;
+              height: $face-height;
+              top: 50%;
+              left: 50%;
+              transform: rotateX(calc(#{$face-deg} * var(--index)))
+                translateZ(calc(#{$face-shift})) translateX(-50%);
 
-        <!-- FONTS -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
+            }
+            @keyframes spin {
+              to {
+                transform: rotateX(-360deg);
+              }
+            }
 
-        <!-- STYLESHEETS -->
-        <link rel="stylesheet" type="text/css" href="assets/css/plugins.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-        <script src="https://kit.fontawesome.com/2ce8d38c9d.js" crossorigin="anonymous"></script>
+          </style>
+       <script>
+            const cursor = document.querySelector('.custom-cursor');
+            const positionElement = (e) => {
+              const mouseY = e.clientY;
+              const mouseX = e.clientX;   
+              cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+            }
+            window.addEventListener('mousemove', positionElement);
+
+            const barrel = document.querySelector(".cylinder");
+            const barrelDimensions = barrel.getBoundingClientRect();
+
+            document.addEventListener("mousemove", e => animateBarrel(e));
+
+            function animateBarrel(e) {
+              const cursor = {
+                x: e.clientX - Math.round(barrelDimensions.left),
+                y: e.clientY - Math.round(barrelDimensions.top)
+              };
+              const angle = {
+                y: 30 * ((cursor.y / barrelDimensions.height) * 2 - 1),
+                x: 30 * ((cursor.x / barrelDimensions.width) * 2 - 1)
+              };
+              barrel.style.transform = `rotateX(${-angle.y}deg) rotateY(${angle.x}deg)`;
+            }
+
+          </script>
+
+
 
 
     </head>
@@ -33,113 +119,14 @@
 
     <body>
     
-       
-        <!-- PRELOADER -->
-        <div class="preloader">
-           
-            <!-- SPINNER -->
-            <div class="spinner">
-             
-              <div class="bounce-1"></div>
-              <div class="bounce-2"></div>
-              <div class="bounce-3"></div>
-              
-            </div>
-            <!-- /SPINNER -->
-            
-        </div>
-        <!-- /PRELOADER -->
-
-
-        <!-- HERO -->
-        <div class="hero">
-
-
-            <!-- FRONT CONTENT -->
-            <div class="front-content">
-
-
-                <!-- CONTAINER MID -->
-                <div class="container-mid">
-
-
-                    <!-- ANIMATION CONTAINER -->
-                    <div class="animation-container animation-fade-down" data-animation-delay="0">
-                        <img class="img-responsive logo" src="assets/img/logo.png" alt="image">
-                       
-                        <h1>Turki Haris</h1>
-                        
-                    </div>
-                    <!-- /ANIMATION CONTAINER -->
-                    
-                    
-                    <!-- ANIMATION CONTAINER -->
-                    <div class="animation-container animation-fade-right" data-animation-delay="300">
-                        
-                        <h1>We're Coming Soon..</h1>
-                        
-                    </div>
-                    <!-- /ANIMATION CONTAINER -->
-                    
-                    
-                    <!-- ANIMATION CONTAINER -->
-                    <div class="animation-container animation-fade-left" data-animation-delay="600"> 
-                       
-                        <p class="subline">We're working on our new website. Stay Tuned</p>
-                        
-                    </div>
-                    <!-- /ANIMATION CONTAINER -->
-                    
-
-                    <!-- ANIMATION CONTAINER -->
-                    <div class="animation-container animation-fade-up" data-animation-delay="900"> 
-                       <a href="https://www.linkedin.com/in/turkiharis/"><i id="hello" class="fa-brands fa-linkedin" "></i></a>  
-                    </div>
-                    <!-- /ANIMATION CONTAINER -->
-                    
-
-                </div>
-                <!-- /CONTAINER MID -->
-
-
-                <!-- FOOTER -->
-                <div class="footer">
-                    
-
-                    <!-- ANIMATION CONTAINER -->
-                    <div class="animation-container animation-fade-up" data-animation-delay="1200">
-                       
-                       
-                    </div>
-                    <!-- /ANIMATION CONTAINER -->
-                    
-
-                </div>
-                <!-- /FOOTER -->
-
-
-            </div>
-            <!-- /FRONT CONTENT -->
-
-
-            <!-- BACKGROUND CONTENT -->
-            <div class="background-content parallax-on">
-
-                <div class="background-overlay"></div>
-                <div class="background-img layer" data-depth="0.05"></div>
-                
-            </div>
-            <!-- /BACKGROUND CONTENT -->
-
-
-        </div>
-        <!-- /HERO -->
-
-
-        <!-- JAVASCRIPTS -->
-        <script type="text/javascript" src="assets/js/plugins.js"></script>
-        <script type="text/javascript" src="assets/js/main.js"></script>
-
+      .custom-cursor
+      .title 
+        span WE ARE CREATING SOMETING BEST
+      .holder
+        .cylinder
+          - for (let i = 0; i < 20; i++)
+            .face(style=`--index: ${i};`) COMING SOON
+        
 
     </body> 
     
